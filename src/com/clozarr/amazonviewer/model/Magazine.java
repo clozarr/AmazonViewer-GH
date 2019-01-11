@@ -16,6 +16,46 @@ public class Magazine {
 		this.editionDate = editionDate;
 		this.editorial = editorial;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTittle() {
+		return tittle;
+	}
+
+	public void setTittle(String tittle) {
+		this.tittle = tittle;
+	}
+
+	public Date getEditionDate() {
+		return editionDate;
+	}
+
+	public void setEditionDate(Date editionDate) {
+		this.editionDate = editionDate;
+	}
+
+	public String getEditorial() {
+		return editorial;
+	}
+
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
+
+	public String[] getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(String[] authors) {
+		this.authors = authors;
+	}
 	 
 	
 	
