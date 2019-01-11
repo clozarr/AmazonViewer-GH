@@ -2,16 +2,24 @@ package com.clozarr.amazonviewer.model;
 
 public class Serie {
 
-	 int id;
-	 String tittle;
-	 String genre;
-	 String creator;
-	 int duration;
-	 short year;
-	 boolean viewed;
-	 int timeViewed;
+	 private int id;
+	 private String tittle;
+	 private String genre;
+	 private String creator;
+	 private int duration;
+	 private short year;
+	 private boolean viewed;
+	 private int timeViewed;
 	
-	 int seasonQuantity;
-	 //Chapter[] chapters
+	 private int seasonQuantity;
+	 //private Chapter[] chapters
+
+	public Serie(String tittle, String genre, int duration) {
+		super();
+		this.tittle = tittle;
+		this.genre = genre;
+		this.duration = duration;
+	}
 	
+	 
 }

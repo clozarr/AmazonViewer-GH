@@ -2,12 +2,21 @@ package com.clozarr.amazonviewer.model;
 
 public class Chapter {
 
-	int id;
-	String tittle;
-	int duration;
-	short year;
-	boolean viewed;
-	int timeViewed;
-	int seasonNumber;
+	private int id;
+	private String tittle;
+	private int duration;
+	private short year;
+	private boolean viewed;
+	private int timeViewed;
+	private int seasonNumber;
+	
+	public Chapter(String tittle, int duration, short year) {
+		super();
+		this.tittle = tittle;
+		this.duration = duration;
+		this.year = year;
+	}
 
+	
+	
 }

@@ -1,5 +1,7 @@
 package com.clozarr.amazonviewer;
 
+import java.util.Date;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -22,7 +24,9 @@ public class Main {
 			System.out.println("2. Series");
 			System.out.println("3. Books");
 			System.out.println("4. Magazines");
-			System.out.println("5. Salir");
+			System.out.println("5. Report");
+			System.out.println("6. Report Today");
+			System.out.println("0. Salir");
 
 			int respuesta = 1;
 
@@ -41,6 +45,12 @@ public class Main {
 				showMagazines();
 				break;
 			case 5:
+				makeReport();;
+				break;
+			case 6:
+				makeReport(new Date());;
+				break;
+			case 0:
 				exit = 0;
 				break;
 
@@ -120,6 +130,13 @@ public class Main {
 			System.out.println();
 
 		} while (exit != 0);
+		
+	}
+	
+	public static void makeReport() {
+		
+	}
+	public static void makeReport(Date d) {
 		
 	}
 
