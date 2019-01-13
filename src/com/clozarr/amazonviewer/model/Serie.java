@@ -35,6 +35,17 @@ public class Serie extends Film{
 		this.chapters = chapters;
 	}
 
+ @Override
+public String toString() {
+	// TODO Auto-generated method stub
+	return "::: SERIE :::" +
+		   "\n tittle: " + getTittle() +
+		   "\n genre: " + getGenre() +
+		   "\n creator: " + getCreator() +
+		   "\n duration: " + getDuration() +
+		   "\n seasonQuantity: " + getSeasonQuantity();
+
+}
 	
 	 
 }

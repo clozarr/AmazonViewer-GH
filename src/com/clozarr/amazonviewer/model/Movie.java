@@ -13,16 +13,6 @@ public class Movie extends Film{
 	}
 
 
-
-	public void showData() {
-		
-//		System.out.println("Tittle: " + this.tittle);
-//		System.out.println("Genre: " + this.genre);
-//		System.out.println("Year: " + this.year);
-	}
-	
-	
-
 	public int getId() {
 		return id;
 	}
@@ -33,6 +23,18 @@ public class Movie extends Film{
 
 	public void setTimeViewed(int timeViewed) {
 		this.timeViewed = timeViewed;
+	}
+	
+	@Override
+	public String toString() {
+	  
+		 return "::: MOVIE ::: " +
+				"\n tittle: " + getTittle() +
+				"\n Genero: " + getGenre() +
+				"\n Year: " + getYear() +
+				"\n Creator: " + getCreator() +
+				"\n Duration: " + getDuration();
+		
 	}
 	
 }
