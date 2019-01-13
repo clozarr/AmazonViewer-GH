@@ -1,17 +1,16 @@
 package com.clozarr.amazonviewer.model;
 
-public class Movie extends Film{
+import java.util.Date;
 
-	 private int id;
-	 private int timeViewed;
-	 
+public class Movie extends Film implements IVisualizable {
 
+	private int id;
+	private int timeViewed;
 
 	public Movie(String tittle, String genre, String creator, int duration, short year) {
 		super(tittle, genre, creator, duration);
 		setYear(year);
 	}
-
 
 	public int getId() {
 		return id;
@@ -24,17 +23,34 @@ public class Movie extends Film{
 	public void setTimeViewed(int timeViewed) {
 		this.timeViewed = timeViewed;
 	}
-	
+
 	@Override
 	public String toString() {
-	  
-		 return "::: MOVIE ::: " +
-				"\n tittle: " + getTittle() +
-				"\n Genero: " + getGenre() +
-				"\n Year: " + getYear() +
-				"\n Creator: " + getCreator() +
-				"\n Duration: " + getDuration();
-		
+
+		return "::: MOVIE ::: " + "\n tittle: " + getTittle() + "\n Genero: " + getGenre() + "\n Year: " + getYear()
+				+ "\n Creator: " + getCreator() + "\n Duration: " + getDuration();
+
 	}
-	
+
+	@Override
+	public Date starToSee(Date dateI) {
+		// TODO Auto-generated method stub
+		return dateI;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void stopToSee(Date dateI, Date dateF) {
+		// TODO Auto-generated method stub
+		if (dateF.getSeconds() > dateI.getSeconds()) {
+
+			setTimeViewed(dateF.getSeconds() - dateI.getSeconds());
+
+		} else {
+
+			setTimeViewed(0);
+		}
+
+	}
+
 }

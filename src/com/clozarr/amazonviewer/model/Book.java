@@ -2,7 +2,7 @@ package com.clozarr.amazonviewer.model;
 
 import java.util.Date;
 
-public class Book extends Publication{
+public class Book extends Publication implements IVisualizable{
 
 	private int id;
 	private String isbn;
@@ -59,6 +59,29 @@ public class Book extends Publication{
 	 		   "\n tittle: " + getTittle() +
 	 		   "\n editorial: " + getEditorial() +
 	 		   "\n isbn: " + getIsbn();
-	  }	
+	  }
+
+
+
+	@Override
+	public Date starToSee(Date dateI) {
+		// TODO Auto-generated method stub
+		return dateI;
+	}
+
+
+
+	@Override
+	public void stopToSee(Date dateI, Date dateF) {
+		// TODO Auto-generated method stub
+		if (dateF.getSeconds() > dateI.getSeconds()) {
+
+			setTimeRead(dateF.getSeconds() - dateI.getSeconds());
+
+		} else {
+
+			setTimeRead(0);
+		}
+	}	
 	
 }
