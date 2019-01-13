@@ -1,10 +1,12 @@
 package com.clozarr.amazonviewer.model;
 
+import java.util.ArrayList;
+
 public class Serie extends Film{
 
 	 private int id;
 	 private int seasonQuantity;
-	 private Chapter[] chapters;
+	 private ArrayList<Chapter> chapters;
 
 
 
@@ -27,15 +29,17 @@ public class Serie extends Film{
 		this.seasonQuantity = seasonQuantity;
 	}
 
-	public Chapter[] getChapters() {
+
+
+ public ArrayList<Chapter> getChapters() {
 		return chapters;
 	}
 
-	public void setChapters(Chapter[] chapters) {
+	public void setChapters(ArrayList<Chapter> chapters) {
 		this.chapters = chapters;
 	}
 
- @Override
+@Override
 public String toString() {
 	// TODO Auto-generated method stub
 	return "::: SERIE :::" +

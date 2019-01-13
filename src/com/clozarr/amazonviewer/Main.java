@@ -1,6 +1,9 @@
 package com.clozarr.amazonviewer;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+import com.clozarr.amazonviewer.model.Movie;
 
 public class Main {
 
@@ -67,11 +70,20 @@ public class Main {
 	public static void showMovies() {
 
 		int exit = 0;
+		ArrayList<Movie> movies = Movie.makeMoviesList();
 
 		do {
 			
 			System.out.println();
 			System.out.println(":: MOVIES ::");
+			System.out.println();
+			
+			for (int i = 0; i < movies.size(); i++) {
+				
+				System.out.println((i + 1) + ". " + movies.get(i).getTittle() + ", Visto: " + movies.get(i).isViewed());
+				
+			}
+			System.out.println("0. Regresar al menú");
 			System.out.println();
 
 		} while (exit != 0);
