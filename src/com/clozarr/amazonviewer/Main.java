@@ -2,8 +2,15 @@ package com.clozarr.amazonviewer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
+import com.clozarr.amazonviewer.model.Book;
+import com.clozarr.amazonviewer.model.Chapter;
+import com.clozarr.amazonviewer.model.Magazine;
 import com.clozarr.amazonviewer.model.Movie;
+import com.clozarr.amazonviewer.model.Serie;
+import com.clozarr.report.Report;
 
 public class Main {
 
@@ -16,7 +23,7 @@ public class Main {
 
 	public static void showMenu() {
 
-		int exit = 0;
+		int exit = 1;
 
 		do {
 
@@ -31,60 +38,107 @@ public class Main {
 			System.out.println("6. Report Today");
 			System.out.println("0. Salir");
 
-			int respuesta = 1;
+			System.out.println("\n");
+			System.out.println("Escoja una opción:");
 
-			switch (respuesta) {
+			Scanner sc = new Scanner(System.in);
+			try {
 
-			case 1:
-				showMovies();
-				break;
-			case 2:
-				showSeries();
-				break;
-			case 3:
-				showBooks();
-				break;
-			case 4:
-				showMagazines();
-				break;
-			case 5:
-				makeReport();;
-				break;
-			case 6:
-				makeReport(new Date());;
-				break;
-			case 0:
-				exit = 0;
-				break;
+				int respuesta = sc.nextInt();
 
-			default:
-				System.out.println("..:: ======= ::..");
-				System.out.println("Opción no válida");
-				break;
+				switch (respuesta) {
+
+				case 1:
+					showMovies();
+					break;
+				case 2:
+					showSeries();
+					break;
+				case 3:
+					showBooks();
+					break;
+				case 4:
+					showMagazines();
+					break;
+				case 5:
+					makeReport();
+					;
+					break;
+				case 6:
+					makeReport(new Date());
+					;
+					break;
+				case 0:
+					exit = 0;
+					break;
+
+				default:
+					System.out.println("..:: ======= ::..");
+					System.out.println("Opción no válida");
+					break;
+				}
+			} catch (InputMismatchException e) {
+
+				System.out.println("Error: opción no válida");
 			}
 
 		} while (exit != 0);
 
 	}
 
+	public static ArrayList<Movie> movies;
+
 	public static void showMovies() {
 
-		int exit = 0;
-		ArrayList<Movie> movies = Movie.makeMoviesList();
+		int exit = 1;
+		movies = Movie.makeMoviesList();
 
 		do {
-			
+
 			System.out.println();
 			System.out.println(":: MOVIES ::");
 			System.out.println();
-			
+
 			for (int i = 0; i < movies.size(); i++) {
-				
-				System.out.println((i + 1) + ". " + movies.get(i).getTittle() + ", Visto: " + movies.get(i).isViewed());
-				
+
+				System.out
+						.println((i + 1) + ". " + movies.get(i).getTittle() + ", Visto: " + movies.get(i).isChecked());
+
 			}
 			System.out.println("0. Regresar al menú");
 			System.out.println();
+
+			System.out.println("Selecciones una película:");
+			Scanner scanner = new Scanner(System.in);
+			int index = scanner.nextInt();
+
+			if (index > 0) {
+
+				Movie movie = movies.get(index - 1);
+				movie.setViewed(true);
+				Date dateI = movie.starToSee(new Date());
+
+				for (int i = 0; i < 5000; i++) {
+
+					System.out.println("........");
+				}
+
+				movie.stopToSee(dateI, new Date());
+				System.out.println(movie);
+				movie.setViewed(true);
+				System.out.println("La viste por: " + movie.getTimeViewed() + " seg");
+				System.out.println();
+
+			} else if (index == 0) {
+
+				exit = 0;
+
+			} else {
+
+				System.out.println("..::: OPCIÓN NO VALIDA :::..");
+				exit = 1;
+
+			}
 
 		} while (exit != 0);
 
@@ -92,24 +146,87 @@ public class Main {
 
 	public static void showSeries() {
 
-		int exit = 0;
+		int exit = 1;
+		ArrayList<Serie> series = Serie.makeSerieList();
 
 		do {
-			
+
 			System.out.println();
 			System.out.println(":: SERIES ::");
 			System.out.println();
 
+			for (int i = 0; i < series.size(); i++) {
+
+				System.out
+						.println((i + 1) + ". " + series.get(i).getTittle() + ", Visto: " + series.get(i).isChecked());
+
+			}
+			System.out.println("0. Regresar al menú");
+			System.out.println();
+
+			System.out.println("Selecciones una Serie:");
+			Scanner scanner = new Scanner(System.in);
+			int index = scanner.nextInt();
+
+			if (index > 0) {
+
+				Serie serie = series.get(index - 1);
+				ArrayList<Chapter> chapters = serie.getChapters();
+
+				for (int j = 0; j < chapters.size(); j++) {
+					System.out.println(
+							(j + 1) + ". " + chapters.get(j).getTittle() + ", Visto: " + chapters.get(j).isChecked());
+				}
+				System.out.println("0. Regresar al menú");
+				System.out.println();
+
+				System.out.println("Escoja un capitulo: ");
+				Scanner scn = new Scanner(System.in);
+				int indexChapter = scn.nextInt();
+
+				if (indexChapter > 0 && indexChapter <= (chapters.size() + 1)) {
+
+					Chapter chapter = chapters.get(index - 1);
+
+					Date dateI = chapter.starToSee(new Date());
+
+					for (int i = 0; i < 5000; i++) {
+
+						System.out.println("........");
+					}
+
+					chapter.stopToSee(dateI, new Date());
+					chapter.setViewed(true);
+					System.out.println(chapter);
+					System.out.println("La viste por: " + chapter.getTimeViewed() + " seg");
+					System.out.println();
+
+				} else {
+
+					System.out.println("..::: OPCIÓN NO VALIDA :::..");
+				}
+
+			} else if (index == 0) {
+
+				exit = 0;
+
+			} else {
+
+				System.out.println("..::: OPCIÓN NO VALIDA :::..");
+				exit = 1;
+
+			}
+
 		} while (exit != 0);
-		
+
 	}
 
 	public static void showChapters() {
-       
+
 		int exit = 0;
 
 		do {
-			
+
 			System.out.println();
 			System.out.println(":: CHAPTERS ::");
 			System.out.println();
@@ -118,38 +235,134 @@ public class Main {
 	}
 
 	public static void showBooks() {
-       
-		int exit = 0;
+
+		int exit = 1;
+		ArrayList<Book> books = Book.makeBookList();
 
 		do {
-			
+
 			System.out.println();
 			System.out.println(":: BOOKS ::");
 			System.out.println();
 
+			for (int i = 0; i < books.size(); i++) {
+
+				System.out.println((i + 1) + ". " + books.get(i).getTittle() + ", Visto: " + books.get(i).isChecked());
+
+			}
+			System.out.println("0. Regresar al menú");
+			System.out.println();
+
+			System.out.println("Selecciones un libro:");
+			Scanner scanner = new Scanner(System.in);
+			int index = scanner.nextInt();
+
+			if (index > 0) {
+
+				Book book = books.get(index - 1);
+				book.setRead(true);
+				Date dateI = book.starToSee(new Date());
+
+				for (int i = 0; i < 5000; i++) {
+
+					System.out.println("........");
+				}
+
+				book.stopToSee(dateI, new Date());
+				book.setRead(true);
+				System.out.println(book);
+				System.out.println("La viste por: " + book.getTimeRead() + " seg");
+				System.out.println();
+
+			} else if (index == 0) {
+
+				exit = 0;
+
+			} else {
+
+				System.out.println("..::: OPCIÓN NO VALIDA :::..");
+				exit = 1;
+
+			}
+
 		} while (exit != 0);
-		
+
 	}
 
 	public static void showMagazines() {
 
-		int exit = 0;
+		int exit = 1;
+		ArrayList<Magazine> magazines = Magazine.makeMagazineList();
 
 		do {
-			
+
 			System.out.println();
 			System.out.println(":: MAGAZINES ::");
 			System.out.println();
 
+			for (int i = 0; i < magazines.size(); i++) {
+
+				System.out.println((i + 1) + ". " + magazines.get(i).getTittle());
+
+			}
+			System.out.println("0. Regresar al menú");
+			System.out.println();
+
+			System.out.println("Selecciones un Magazine:");
+			Scanner scanner = new Scanner(System.in);
+			int index = scanner.nextInt();
+
+			if (index > 0 && index <= magazines.size()) {
+
+				System.out.println("Excogió: " + magazines.get(index).toString());
+
+			} else if (index == 0) {
+
+				exit = 0;
+
+			} else {
+
+				System.out.println("..::: OPCIÓN NO VALIDA :::..");
+				exit = 1;
+
+			}
+
 		} while (exit != 0);
-		
+
 	}
-	
+
 	public static void makeReport() {
-		
+
+		Report report = new Report();
+		report.setNameFile("Reporte");
+		report.setTittle("::: VISTOS :::");
+		report.setExtension("txt");
+
+		for (Movie movie : movies) {
+
+			report.setContent(movie + "\n");
+		}
+
+		report.makeReport();
+
 	}
+
 	public static void makeReport(Date d) {
-		
+
+		Report report = new Report();
+		report.setNameFile("Reporte -" + d);
+		report.setTittle("::: VISTOS :::");
+		report.setExtension("txt");
+		String content = "";
+		for (Movie movie : movies) {
+
+			if (movie.isViewed()) {
+
+				content += movie + "\n";
+			}
+			report.setContent(content);
+		}
+		report.makeReport();
 	}
 
 }
