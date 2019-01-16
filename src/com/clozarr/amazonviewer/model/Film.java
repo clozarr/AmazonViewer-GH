@@ -1,5 +1,18 @@
 package com.clozarr.amazonviewer.model;
 
+
+/**
+ * <h1>Film</h1>
+ * Es una clase padre abstracta
+ * 
+ * <p>Es la clase base de la famiia Film, 
+ *  como es abstracta  no pueden crearse 
+ *  instancias. Contiene el método abstracto
+ *  {@code view()} que es obligatorio implementar</p>
+ *  
+ *  @author Carlos A Lozano A
+ *  @version 1.0
+ * */
 public abstract class Film {
 
 	private String tittle;
@@ -71,5 +84,8 @@ public abstract class Film {
 		
 	}
    
+	/**
+	 * Método {@code view()} es obligatorio de implementar
+	 * */
 	public abstract void view();
 }

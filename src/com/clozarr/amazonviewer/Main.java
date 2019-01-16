@@ -12,6 +12,18 @@ import com.clozarr.amazonviewer.model.Movie;
 import com.clozarr.amazonviewer.model.Serie;
 import com.clozarr.report.Report;
 
+
+/**
+ * <h1>Amazon Viewer</h1>
+ * AmazonViewer es un programa que permite
+ * visualizar movies, series, books y magazines.
+ * te permite generar reportes generales y fecha 
+ * del dia. 
+ * 
+ * @author:Carlos A Lozano A
+ * @version:1.1
+ * @since: 2018
+ * */
 public class Main {
 
 	public static void main(String[] args) {
