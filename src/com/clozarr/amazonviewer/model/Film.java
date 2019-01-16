@@ -1,6 +1,6 @@
 package com.clozarr.amazonviewer.model;
 
-public class Film {
+public abstract class Film {
 
 	private String tittle;
 	private String genre;
@@ -70,5 +70,6 @@ public class Film {
 		return this.isViewed()?"SI":"NO";
 		
 	}
-
+   
+	public abstract void view();
 }

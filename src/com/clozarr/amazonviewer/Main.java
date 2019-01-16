@@ -18,7 +18,8 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		showMenu();
-
+           
+             
 	}
 
 	public static void showMenu() {
@@ -144,10 +145,12 @@ public class Main {
 
 	}
 
+	static ArrayList<Serie> series = Serie.makeSerieList();
+	static ArrayList<Chapter> chapters = new ArrayList<>();
+
 	public static void showSeries() {
 
 		int exit = 1;
-		ArrayList<Serie> series = Serie.makeSerieList();
 
 		do {
 
@@ -158,7 +161,7 @@ public class Main {
 			for (int i = 0; i < series.size(); i++) {
 
 				System.out
-						.println((i + 1) + ". " + series.get(i).getTittle() + ", Visto: " + series.get(i).isChecked());
+						.println((i + 1) + ". " + series.get(i).getTittle() + ", Vista: " + series.get(i).isChecked());
 
 			}
 			System.out.println("0. Regresar al menú");
@@ -171,7 +174,8 @@ public class Main {
 			if (index > 0) {
 
 				Serie serie = series.get(index - 1);
-				ArrayList<Chapter> chapters = serie.getChapters();
+
+				chapters = serie.getChapters();
 
 				for (int j = 0; j < chapters.size(); j++) {
 					System.out.println(
@@ -186,20 +190,9 @@ public class Main {
 
 				if (indexChapter > 0 && indexChapter <= (chapters.size() + 1)) {
 
-					Chapter chapter = chapters.get(index - 1);
-
-					Date dateI = chapter.starToSee(new Date());
-
-					for (int i = 0; i < 5000; i++) {
-
-						System.out.println("........");
-					}
-
-					chapter.stopToSee(dateI, new Date());
-					chapter.setViewed(true);
-					System.out.println(chapter);
-					System.out.println("La viste por: " + chapter.getTimeViewed() + " seg");
-					System.out.println();
+					Chapter chapter = chapters.get(indexChapter - 1);
+					chapter.view();
+					serie.view();
 
 				} else {
 
@@ -234,10 +227,10 @@ public class Main {
 		} while (exit != 0);
 	}
 
+	static ArrayList<Book> books = Book.makeBookList();
 	public static void showBooks() {
 
 		int exit = 1;
-		ArrayList<Book> books = Book.makeBookList();
 
 		do {
 
@@ -260,19 +253,7 @@ public class Main {
 			if (index > 0) {
 
 				Book book = books.get(index - 1);
-				book.setRead(true);
-				Date dateI = book.starToSee(new Date());
-
-				for (int i = 0; i < 5000; i++) {
-
-					System.out.println("........");
-				}
-
-				book.stopToSee(dateI, new Date());
-				book.setRead(true);
-				System.out.println(book);
-				System.out.println("La viste por: " + book.getTimeRead() + " seg");
-				System.out.println();
+				book.view();
 
 			} else if (index == 0) {
 

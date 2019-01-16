@@ -1,11 +1,13 @@
 package com.clozarr.amazonviewer.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Chapter extends Movie {
 
 	private int id;
 	private int seasonNumber;
+    
 
 	public Chapter(String tittle, String genre, String creator, int duration, short year, int seasonNumber) {
 		super(tittle, genre, creator, duration, year);
@@ -44,6 +46,27 @@ public class Chapter extends Movie {
 
 		return chapters;
 
+	}
+	
+	@Override
+	public void view() {
+		// TODO Auto-generated method stub
+		Date dateI = starToSee(new Date());
+
+		for (int i = 0; i < 5000; i++) {
+
+			System.out.println("........");
+		}
+
+	    stopToSee(dateI, new Date());
+		setViewed(true);
+		
+
+		System.out.println(toString());
+		System.out.println("Viste el caítulo por: " + getTimeViewed() + " seg");
+		System.out.println();
+		
+		
 	}
 
 }

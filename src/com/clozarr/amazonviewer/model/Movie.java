@@ -39,13 +39,12 @@ public class Movie extends Film implements IVisualizable {
 		return dateI;
 	}
 
-	
 	@Override
 	public void stopToSee(Date dateI, Date dateF) {
 		// TODO Auto-generated method stub
-		if (dateF.getTime() > dateI.getTime()){
+		if (dateF.getTime() > dateI.getTime()) {
 
-			setTimeViewed((int)dateF.getTime() - (int)dateI.getTime());
+			setTimeViewed((int) dateF.getTime() - (int) dateI.getTime());
 
 		} else {
 
@@ -53,20 +52,39 @@ public class Movie extends Film implements IVisualizable {
 		}
 
 	}
-	
-	public static ArrayList<Movie> makeMoviesList(){
-		
+
+	public static ArrayList<Movie> makeMoviesList() {
+
 		ArrayList<Movie> movies = new ArrayList<>();
-		
-		
+
 		for (int i = 1; i <= 5; i++) {
-		 
-			movies.add(new Movie("Movie " + i, "Genero " + i, "Creador " + i, 120, (short)2017));
-			
+
+			movies.add(new Movie("Movie " + i, "Genero " + i, "Creador " + i, 120, (short) 2017));
+
 		}
-		
+
 		return movies;
-		
+
+	}
+
+	@Override
+	public void view() {
+		// TODO Auto-generated method stub
+
+		this.setViewed(true);
+		Date dateI = this.starToSee(new Date());
+
+		for (int i = 0; i < 5000; i++) {
+
+			System.out.println("........");
+		}
+
+		this.stopToSee(dateI, new Date());
+		System.out.println(toString());
+		this.setViewed(true);
+		System.out.println("La viste por: " + this.getTimeViewed() + " seg");
+		System.out.println();
+
 	}
 
 }
