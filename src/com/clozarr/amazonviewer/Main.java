@@ -341,7 +341,9 @@ public class Main {
 	}
 
 	public static void makeReport(Date d) {
-
+ 
+		
+		
 		Report report = new Report();
 		report.setNameFile("Reporte -" + d);
 		report.setTittle("::: VISTOS :::");
