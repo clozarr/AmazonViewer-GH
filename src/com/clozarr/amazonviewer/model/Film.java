@@ -85,7 +85,7 @@ public abstract class Film {
 	}
    
 	/**
-	 * Método {@code view()} es obligatorio de implementar
+	 * Metodo {@code view()} es obligatorio de implementar
 	 * */
 	public abstract void view();
 }
