@@ -34,4 +34,29 @@ public class AmazonUtil {
 		return response;
 	}
 
+	public enum Day {
+
+		MONDAY("LUNES"), TUESDAY("MARTES"), WEDNESDAY("MIERCOLES"), THURSDAY("JUEVES"), FRIDAY("VIERNES"),
+		SATURDAY("SABADO"), SUNDAY("DOMINGO");
+
+		String spanish;
+
+		Day(String s) {
+			this.spanish = s;
+		}
+		
+		String getSpanish(){
+			
+			return this.spanish;
+		}
+
+	}
+
+	public static void mostrarEnum() {
+
+		System.out.println("Inglés: " + Day.MONDAY);
+		System.out.println("Español: " + Day.MONDAY.getSpanish());
+
+	}
+
 }

@@ -10,6 +10,7 @@ import com.clozarr.amazonviewer.model.Chapter;
 import com.clozarr.amazonviewer.model.Magazine;
 import com.clozarr.amazonviewer.model.Movie;
 import com.clozarr.amazonviewer.model.Serie;
+import com.clozarr.amazonviewer.util.AmazonUtil;
 import com.clozarr.report.Report;
 
 
@@ -29,8 +30,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		showMenu();
-           
+		//showMenu();
+           AmazonUtil.mostrarEnum();
              
 	}
 
