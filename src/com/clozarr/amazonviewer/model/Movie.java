@@ -3,12 +3,14 @@ package com.clozarr.amazonviewer.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.clozarr.amazonviewer.dao.IMovieDAO;
+
 
 /**
  * Hereda de {@link Film}
  * Implementa {@link IVisualizable}
  * */
-public class Movie extends Film implements IVisualizable {
+public class Movie extends Film implements IVisualizable, IMovieDAO {
 
 	private int id;
 	private int timeViewed;
@@ -17,9 +19,18 @@ public class Movie extends Film implements IVisualizable {
 		super(tittle, genre, creator, duration);
 		setYear(year);
 	}
+	
+	public Movie() {
+			
+	}
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		
+		this.id = id;
 	}
 
 	public int getTimeViewed() {
@@ -67,15 +78,7 @@ public class Movie extends Film implements IVisualizable {
 
 	public static ArrayList<Movie> makeMoviesList() {
 
-		ArrayList<Movie> movies = new ArrayList<>();
-
-		for (int i = 1; i <= 5; i++) {
-
-			movies.add(new Movie("Movie " + i, "Genero " + i, "Creador " + i, 120, (short) 2017));
-
-		}
-
-		return movies;
+		return new Movie().read();
 
 	}
 
@@ -86,7 +89,9 @@ public class Movie extends Film implements IVisualizable {
 	public void view() {
 		// TODO Auto-generated method stub
 
-		this.setViewed(true);
+	
+		new Movie().setMovieViewed(this);
+		
 		Date dateI = this.starToSee(new Date());
 
 		for (int i = 0; i < 5000; i++) {

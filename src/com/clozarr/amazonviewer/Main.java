@@ -30,8 +30,8 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		//showMenu();
-           AmazonUtil.mostrarEnum();
+		 showMenu();
+        //AmazonUtil.mostrarEnum();
              
 	}
 
@@ -129,7 +129,6 @@ public class Main {
 			if (index > 0) {
 
 				Movie movie = movies.get(index - 1);
-				movie.setViewed(true);
 				Date dateI = movie.starToSee(new Date());
 
 				for (int i = 0; i < 5000; i++) {
@@ -139,9 +138,8 @@ public class Main {
 
 				movie.stopToSee(dateI, new Date());
 				System.out.println(movie);
-				movie.setViewed(true);
-				System.out.println("La viste por: " + movie.getTimeViewed() + " seg");
-				System.out.println();
+				movie.view();
+				
 
 			} else if (index == 0) {
 
