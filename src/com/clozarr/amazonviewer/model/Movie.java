@@ -1,5 +1,6 @@
 package com.clozarr.amazonviewer.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,7 +24,7 @@ public class Movie extends Film implements IVisualizable, IMovieDAO {
 	public Movie() {
 			
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -81,6 +82,11 @@ public class Movie extends Film implements IVisualizable, IMovieDAO {
 		return new Movie().read();
 
 	}
+	
+	public static ArrayList<Movie>  makeReport(String fechaReporte){
+		
+		return  new Movie().read(fechaReporte);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -89,18 +95,20 @@ public class Movie extends Film implements IVisualizable, IMovieDAO {
 	public void view() {
 		// TODO Auto-generated method stub
 
-	
-		new Movie().setMovieViewed(this);
-		
 		Date dateI = this.starToSee(new Date());
 
-		for (int i = 0; i < 5000; i++) {
+		for (int i = 0; i < 500; i++) {
 
 			System.out.println("........");
 		}
 
 		this.stopToSee(dateI, new Date());
 		System.out.println(toString());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaVisto = sdf.format(new Date());
+		
+		setMovieViewed(this, fechaVisto);
 		this.setViewed(true);
 		System.out.println("La viste por: " + this.getTimeViewed() + " seg");
 		System.out.println();

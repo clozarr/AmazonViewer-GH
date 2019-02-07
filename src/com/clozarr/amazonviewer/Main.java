@@ -10,29 +10,26 @@ import com.clozarr.amazonviewer.model.Chapter;
 import com.clozarr.amazonviewer.model.Magazine;
 import com.clozarr.amazonviewer.model.Movie;
 import com.clozarr.amazonviewer.model.Serie;
-import com.clozarr.amazonviewer.util.AmazonUtil;
 import com.clozarr.report.Report;
 
 
 /**
- * <h1>Amazon Viewer</h1>
- * AmazonViewer es un programa que permite
- * visualizar movies, series, books y magazines.
- * te permite generar reportes generales y fecha 
- * del dia. 
+ * <h1>Amazon Viewer</h1> AmazonViewer es un programa que permite visualizar
+ * movies, series, books y magazines. te permite generar reportes generales y
+ * fecha del dia.
  * 
  * @author:Carlos A Lozano A
  * @version:1.1
  * @since: 2018
- * */
+ */
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 showMenu();
-        //AmazonUtil.mostrarEnum();
-             
+		showMenu();
+		// AmazonUtil.mostrarEnum();
+
 	}
 
 	public static void showMenu() {
@@ -49,7 +46,7 @@ public class Main {
 			System.out.println("3. Books");
 			System.out.println("4. Magazines");
 			System.out.println("5. Report");
-			System.out.println("6. Report Today");
+			System.out.println("6. Report Date");
 			System.out.println("0. Salir");
 
 			System.out.println("\n");
@@ -76,11 +73,11 @@ public class Main {
 					break;
 				case 5:
 					makeReport();
-					;
+
 					break;
 				case 6:
-					makeReport(new Date());
-					;
+					makeReportWithDate();
+
 					break;
 				case 0:
 					exit = 0;
@@ -139,7 +136,6 @@ public class Main {
 				movie.stopToSee(dateI, new Date());
 				System.out.println(movie);
 				movie.view();
-				
 
 			} else if (index == 0) {
 
@@ -239,6 +235,7 @@ public class Main {
 	}
 
 	static ArrayList<Book> books = Book.makeBookList();
+
 	public static void showBooks() {
 
 		int exit = 1;
@@ -339,16 +336,19 @@ public class Main {
 
 	}
 
-	public static void makeReport(Date d) {
- 
-		
-		
+	public static void makeReportWithDate() {
+
+		System.out.println("Digite una fecha para el reporte: ");
+		Scanner scanner = new Scanner(System.in);
+		String reportDate = scanner.next();
+
+		ArrayList<Movie> viewedMovies = Movie.makeReport(reportDate);
 		Report report = new Report();
-		report.setNameFile("Reporte -" + d);
+		report.setNameFile("Reporte -" + reportDate);
 		report.setTittle("::: VISTOS :::");
 		report.setExtension("txt");
 		String content = "";
-		for (Movie movie : movies) {
+		for (Movie movie : viewedMovies) {
 
 			if (movie.isViewed()) {
 

@@ -15,16 +15,16 @@ public interface IMovieDAO extends IDBConnection{
 
 	  
 	
-	default Movie setMovieViewed(Movie movie){
+	default Movie setMovieViewed(Movie movie, String fechaVisto){
 		
 		try(Connection connection = connectToDB()){
 			
 			Statement statement = connection.createStatement();
 			String query = "INSERT INTO " + TVIEWED +
-					       " (" + TVIEWED_ID_MATERIAL + ", " + TVIEWED_ID_ELEMENT + ", " + TVIEWED_ID_USER + ")" +
-					       "VALUES(" + ID_MATERIALS[0] + ", " + movie.getId() + ", " + TUSER_IDUSUARIO + ")";
+					       " (" + TVIEWED_ID_MATERIAL + ", " + TVIEWED_ID_ELEMENT + ", " + TVIEWED_ID_USER + ", " + TVIEWED_DATE + ")"
+					       + "VALUES(" + ID_MATERIALS[0] + ", " + movie.getId() + ", " + TUSER_IDUSUARIO + ", '" + fechaVisto + "')";
 			
-			System.out.println("Está aqui");
+			
 			if(statement.executeUpdate(query) > 0) {
 				
 				System.out.println("Se marcó en visto");
@@ -33,6 +33,7 @@ public interface IMovieDAO extends IDBConnection{
 			
 		}catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		
@@ -48,6 +49,43 @@ public interface IMovieDAO extends IDBConnection{
 			String sql = "SELECT * FROM " + TMOVIE;
 			
 			PreparedStatement prepareStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			
+			while(resultSet.next()) {
+			
+				Movie movie = new Movie(resultSet.getString(TMOVIE_TITLE), 
+						resultSet.getString(TMOVIE_GENRE), 
+						resultSet.getString(TMOVIE_CREATOR), 
+						Integer.valueOf(resultSet.getString(TMOVIE_DURATION)), 
+						Short.valueOf(resultSet.getString(TMOVIE_YEAR)));
+				
+				movie.setId(Integer.valueOf(resultSet.getString(TMOVIE_ID)));
+				movie.setViewed(getMovieViewed(prepareStatement, connection, Integer.valueOf(resultSet.getString(TMOVIE_ID))));
+				movies.add(movie);
+			}
+			
+			
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return movies;
+	}
+	
+	
+	default ArrayList<Movie> read(String fechaReporte){
+		
+		ArrayList<Movie> movies = new ArrayList<>();
+		
+		try(Connection connection = connectToDB()){
+			
+			String sql = "SELECT * FROM movie inner join viewed on movie.id = viewed.id_element and viewed.date_viewed = ?";
+
+			
+			PreparedStatement prepareStatement = connection.prepareStatement(sql);
+			prepareStatement.setNString(1, fechaReporte);
 			ResultSet resultSet = prepareStatement.executeQuery();
 			
 			while(resultSet.next()) {

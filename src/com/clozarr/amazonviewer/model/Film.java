@@ -79,6 +79,9 @@ public abstract class Film {
 		return viewed;
 	}
 
+	/**
+	 * El médoto  {@code setViewed()} permite establecer si una pelicula es vista.
+	 * */
 	public void setViewed(boolean viewed) {
 		this.viewed = viewed;
 	}
