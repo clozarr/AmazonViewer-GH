@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.clozarr.amazonviewer.model.Book;
 import com.clozarr.amazonviewer.model.Chapter;
@@ -110,12 +111,15 @@ public class Main {
 			System.out.println(":: MOVIES ::");
 			System.out.println();
 
-			for (int i = 0; i < movies.size(); i++) {
+			AtomicInteger atomicInteger = new AtomicInteger(1);
+			movies.forEach(movie ->  System.out.println(atomicInteger.getAndIncrement() + ". " + movie.getTittle() + ", Visto: " + movie.isChecked()));
+			
+			/*for (int i = 0; i < movies.size(); i++) {
 
 				System.out
 						.println((i + 1) + ". " + movies.get(i).getTittle() + ", Visto: " + movies.get(i).isChecked());
 
-			}
+			}*/
 			System.out.println("0. Regresar al menú");
 			System.out.println();
 
@@ -347,15 +351,19 @@ public class Main {
 		report.setNameFile("Reporte -" + reportDate);
 		report.setTittle("::: VISTOS :::");
 		report.setExtension("txt");
-		String content = "";
-		for (Movie movie : viewedMovies) {
+		StringBuilder content = new StringBuilder();
+		
+		viewedMovies.stream().filter(movie -> movie.isViewed()).forEach(movie -> content.append(movie + "\n"));
+		report.setContent(content.toString());
+		
+		
+		/*for (Movie movie : viewedMovies) {
 
 			if (movie.isViewed()) {
 
 				content += movie + "\n";
 			}
-			report.setContent(content);
-		}
+		}*/
 		report.makeReport();
 	}
 
