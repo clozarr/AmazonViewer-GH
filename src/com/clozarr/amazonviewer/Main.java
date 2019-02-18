@@ -1,4 +1,4 @@
-package com.clozarr.amazonviewer;
+package src.com.clozarr.amazonviewer;
 
 import java.util.ArrayList;
 import java.util.Date;
